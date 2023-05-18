@@ -30,17 +30,17 @@ export default async function Home() {
     <>
       <div className="z-10 w-full max-w-2xl px-5 xl:px-0">
         <h1
-          className="animate-fade-up bg-gradient-to-br from-black to-stone-600 bg-clip-text text-center font-display text-6xl font-bold tracking-[-0.02em] text-transparent opacity-0 drop-shadow-sm md:text-10xl md:leading-[5rem]"
+          className="animate-fade-up bg-gradient-to-br from-black to-stone-600 bg-clip-text text-center font-display sm:text-5xl md:text-6xl text-4xl font-bold tracking-[-0.02em] text-transparent opacity-0 drop-shadow-sm md:leading-[5rem]"
           style={{ animationDelay: "0.15s", animationFillMode: "forwards" }}
         >
-          Score last-minute deals in your hood!
+          Find amazing last-minute deals in your hood!
         </h1>
         <p
           className="mt-6 animate-fade-up text-center text-gray-500 opacity-0 md:text-xl"
           style={{ animationDelay: "0.25s", animationFillMode: "forwards" }}
         >
           <Balancer>
-            Find exclusive discounts and promotions from local shops and retailers 
+            Discover exclusive discounts and promotions from local shops and retailers 
           </Balancer>
         </p>
         <div
