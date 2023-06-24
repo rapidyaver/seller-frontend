@@ -2,6 +2,7 @@ import Balancer from "react-wrap-balancer";
 import Prisma from '@/lib/prisma';
 import TabMenuHome from "@/components/home/tab-menu-home";
 import { headers } from 'next/headers'
+import { LatLng } from "leaflet";
 
 async function getPromotions() {
   const query = await Prisma.$queryRaw<{ id: string }[]> `SELECT id FROM "Location" l  where ST_DWithin(coords::geography, ST_MakePoint(52.0562912, 4.4980833),1609.344);`
@@ -23,8 +24,10 @@ async function getPromotions() {
 export default async function Home() {
   const headersList = headers()
   console.log(headersList)
+  const lat = headersList.get("x-vercel-ip-latitude");
+  const long = headersList.get("x-vercel-ip-longitude");
   console.log("lat "  + headersList.get("x-vercel-ip-latitude"));
-  console.log("long "  + headersList.get("x-vercel-ip-long"));
+  console.log("long "  + headersList.get("x-vercel-ip-longitude"));
   console.log("city "  + headersList.get("x-vercel-ip-city"));
   const promotions = await getPromotions();
   return (
@@ -51,7 +54,7 @@ export default async function Home() {
         </div>
       </div>
 
-      <TabMenuHome promotions={promotions}></TabMenuHome>
+      <TabMenuHome promotions={promotions} latLng={new LatLng(lat, long)}></TabMenuHome>
     </>
   );
 }

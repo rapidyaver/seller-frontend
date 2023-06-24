@@ -4,11 +4,13 @@ import Map  from "@/components/shared/map";
 import { Session } from "next-auth";
 import { Location, Promotion, PromotionsOnLocations } from "@prisma/client";
 import { useState } from "react";
+import { LatLng } from "leaflet";
 
 type Props = {
     promotions: (Promotion & {
         locations: PromotionsOnLocations[];
     })[],
+    latLng?: LatLng,
   };
   
 export default function TabMenuHome(props:Props) {
@@ -40,7 +42,7 @@ export default function TabMenuHome(props:Props) {
       }
       {
         tabName == "Map" && 
-        <Map></Map>
+        <Map latLng={props.latLng}></Map>
       }
         </>
     )
