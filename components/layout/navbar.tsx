@@ -6,10 +6,14 @@ import useScroll from "@/lib/hooks/use-scroll";
 import { useSignInModal } from "./sign-in-modal";
 import UserDropdown from "./user-dropdown";
 import { Session } from "next-auth";
+import { ExternalLink } from "lucide-react";
+import { usePathname } from 'next/navigation';
+
 
 export default function NavBar({ session }: { session: Session | null }) {
   const { SignInModal, setShowSignInModal } = useSignInModal();
   const scrolled = useScroll(50);
+  const location = usePathname();
 
   return (
     <>
@@ -32,6 +36,18 @@ export default function NavBar({ session }: { session: Session | null }) {
             ></Image>
             <p>PromoHunter</p>
           </Link>
+          {
+            location != '/business' && <Link href="/business" className="flex gap-x-0.5 ml-auto mr-6 text-black" >
+            <p>For Business</p>
+            <ExternalLink className="pt-1 pb-1"></ExternalLink>
+          </Link>
+          }
+          {
+            location === '/business' && <Link href="/" className="flex gap-x-0.5 ml-auto mr-6 text-black" >
+            <p>For Individuals</p>
+            <ExternalLink className="pt-1 pb-1"></ExternalLink>
+          </Link>
+          }
           <div>
             {session ? (
               <UserDropdown session={session} />

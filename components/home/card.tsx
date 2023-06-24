@@ -1,54 +1,66 @@
 import { ReactNode } from "react";
 import ReactMarkdown from "react-markdown";
 import Balancer from "react-wrap-balancer";
+import Image from "next/image";
+
+const imageStyle = {
+  border: '1px solid #fff',
+  objectFit: "cover",
+}
 
 export default function Card({
   title,
   description,
-  demo,
+  price,
   large,
+  imageUrl,
 }: {
   title: string;
   description: string;
-  demo: ReactNode;
+  price: string;
+  imageUrl: string;
   large?: boolean;
 }) {
   return (
-    <div
-      className={`relative col-span-1 h-96 overflow-hidden rounded-xl border border-gray-200 bg-white shadow-md ${
-        large ? "md:col-span-2" : ""
-      }`}
-    >
-      <div className="flex h-60 items-center justify-center">{demo}</div>
-      <div className="mx-auto max-w-md text-center">
-        <h2 className="bg-gradient-to-br from-black to-stone-500 bg-clip-text font-display text-xl font-bold text-transparent md:text-3xl md:font-normal">
-          <Balancer>{title}</Balancer>
-        </h2>
-        <div className="prose-sm -mt-2 leading-normal text-gray-500 md:prose">
-          <Balancer>
-            <ReactMarkdown
-              components={{
-                a: ({ node, ...props }) => (
-                  <a
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    {...props}
-                    className="font-medium text-gray-800 underline transition-colors"
-                  />
-                ),
-                code: ({ node, ...props }) => (
-                  <code
-                    {...props}
-                    // @ts-ignore (to fix "Received `true` for a non-boolean attribute `inline`." warning)
-                    inline="true"
-                    className="rounded-sm bg-gray-100 px-1 py-0.5 font-mono font-medium text-gray-800"
-                  />
-                ),
-              }}
-            >
-              {description}
-            </ReactMarkdown>
-          </Balancer>
+    <div className="wrapper z-10 text-gray-900 antialiased">
+      <div>
+        <Image
+          width={350}
+          height={350}
+          className="w-full h-80 rounded-lg object-cover object-center shadow-md"
+          src={imageUrl}
+          alt={description}
+          style={imageStyle}
+        ></Image>
+
+        <div className="relative -mt-16 px-4  ">
+          <div className="rounded-lg bg-white p-6 shadow-lg">
+            <div className="flex items-baseline">
+              <span className="inline-block rounded-full bg-teal-200 px-2 text-xs font-semibold  uppercase tracking-wide text-teal-800">
+                New
+              </span>
+              <div className="ml-2 text-xs font-semibold uppercase tracking-wider text-gray-600">
+                {description}
+              </div>
+            </div>
+
+            <h4 className="mt-1 truncate text-xl font-semibold uppercase leading-tight">
+              {title}
+            </h4>
+
+            <div className="mt-1">
+              ${price}
+              <span className="text-sm text-gray-600"> /piece</span>
+            </div>
+            <div className="mt-4">
+              <span className="text-md font-semibold text-teal-600">
+                4/5 ratings{" "}
+              </span>
+              <span className="text-sm text-gray-600">
+                (based on 234 ratings)
+              </span>
+            </div>
+          </div>
         </div>
       </div>
     </div>

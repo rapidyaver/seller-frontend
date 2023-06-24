@@ -9,7 +9,14 @@ import "leaflet-geosearch/dist/geosearch.css";
 import "leaflet/dist/leaflet.css";
 import L, { LatLng } from "leaflet";
 
-export default function Map() {
+type Props = {
+  latLng?: LatLng;
+};
+
+
+export default function Map({
+  latLng
+}: Props) {
   const prov = new OpenStreetMapProvider();
 
   let icon = L.icon({
@@ -19,55 +26,39 @@ export default function Map() {
     iconUrl: "https://unpkg.com/leaflet@1.6/dist/images/marker-icon.png",
     shadowUrl: "https://unpkg.com/leaflet@1.6/dist/images/marker-shadow.png",
   });
-  const markerOptions = {
-    icon: icon,
-    draggable: false,
-  };
 
-  function LocationMarker() {
-    const [latlng, setLatlng] = useState<LatLng>(new LatLng(40.8054, -74.0241));
-
+  const RecenterAutomatically = ({
+    latLng
+  }: Props) => {
     const map = useMap();
-
-    useEffect(() => {
-      map.locate().on("locationfound", function (e) {
-        setLatlng(e.latlng);
-        map.setView(e.latlng, map.getZoom());
-      });
-    }, [map]);
-    return latlng === null ? null : (
-      <Marker position={latlng} icon={icon}>
-        <Popup>
-          You are here
-        </Popup>
-      </Marker>
-    );
-  }
+     useEffect(() => {
+      if(latLng){
+        map.setView(latLng, 18);
+      }
+     }, [latLng, map]);
+     return null;
+   }
 
   return (
     <MapContainer
-      center={[49.1951, 16.6068]}
+      center={latLng || [49.8, 24]}
       zoom={12}
+      zoomControl={false}
+      scrollWheelZoom={false}
       className="h-full"
-      key={new Date().getTime()}
     >
       <TileLayer
         attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
         url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
       />
-      <SearchControl
-        provider={prov}
-        showMarker={true}
-        showPopup={false}
-        maxMarkers={3}
-        retainZoomLevel={false}
-        animateZoom={true}
-        autoClose={true}
-        searchLabel={"Enter address, please"}
-        keepResult={true}
-        marker={markerOptions}
-      />
-      <LocationMarker />
+      <RecenterAutomatically latLng={latLng}></RecenterAutomatically>
+      {
+      latLng && <Marker position={[latLng.lat, latLng.lng]} icon={icon}>
+        <Popup>
+          You are here
+        </Popup>
+      </Marker>
+      }
     </MapContainer>
   );
 }
