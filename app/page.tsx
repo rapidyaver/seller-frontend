@@ -23,6 +23,8 @@ async function getPromotions() {
 export default async function Home() {
   const headersList = headers()
   console.log(headersList)
+  console.log("lat "  + headersList.get("x-vercel-ip-latitude"));
+  console.log("long "  + headersList.get("x-vercel-ip-long"));
   const promotions = await getPromotions();
   return (
     <>
