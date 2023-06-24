@@ -5,7 +5,7 @@ import Image from "next/image";
 
 const imageStyle = {
   border: '1px solid #fff',
-  objectFit: "cover",
+  "object-fit": "cover",
 }
 
 export default function Card({

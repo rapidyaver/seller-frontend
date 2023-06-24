@@ -6,13 +6,13 @@ import SignInButton from '@/components/layout/sign-in-button';
 import Prisma from '@/lib/prisma';
 import TabMenuBusiness from '@/components/business/tab-menu-business';
 
-export async function getLocations() {
+async function getLocations() {
   const locations = await Prisma.location.findMany();
   console.log(locations);
   return locations;
 }
 
-export async function getPromotions(){
+async function getPromotions(){
   const promotions = await Prisma.promotion.findMany({
     include: { locations: { include: { location: true } } },
   });
