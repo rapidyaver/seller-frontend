@@ -7,6 +7,7 @@ specifiers:
   '@radix-ui/react-label': ^2.0.1
   '@radix-ui/react-popover': ^1.0.2
   '@radix-ui/react-tooltip': ^1.0.2
+  '@react-leaflet/universal-leaflet': ^1.0.1
   '@tailwindcss/aspect-ratio': ^0.4.2
   '@tailwindcss/forms': ^0.5.3
   '@tailwindcss/line-clamp': ^0.4.2
@@ -54,6 +55,7 @@ dependencies:
   '@radix-ui/react-label': 2.0.1_biqbaboplfbrettd7655fr4n2y
   '@radix-ui/react-popover': 1.0.5_ib3m5ricvtkl2cll7qpr2f6lvq
   '@radix-ui/react-tooltip': 1.0.5_ib3m5ricvtkl2cll7qpr2f6lvq
+  '@react-leaflet/universal-leaflet': 1.0.1_leaflet@1.9.4
   '@tailwindcss/aspect-ratio': 0.4.2_tailwindcss@3.3.2
   '@types/leaflet': 1.9.3
   '@types/node': 18.11.18
@@ -866,6 +868,14 @@ packages:
       leaflet: 1.9.4
       react: 18.2.0
       react-dom: 18.2.0_react@18.2.0
+    dev: false
+
+  /@react-leaflet/universal-leaflet/1.0.1_leaflet@1.9.4:
+    resolution: {integrity: sha512-pMTKLWECNzHWOjbYC9QWb6vbGqB8QvAU/X5JaX7A+nyQzsuzmGaYKwKuPTmbKTGkRFEYjVyoXbjpzAkT2fXluA==}
+    peerDependencies:
+      leaflet: '*'
+    dependencies:
+      leaflet: 1.9.4
     dev: false
 
   /@resvg/resvg-wasm/2.0.0-alpha.4:

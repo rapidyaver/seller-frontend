@@ -42,7 +42,7 @@ export default function TabMenuHome(props:Props) {
       }
       {
         tabName == "Map" && 
-        <Map latLng={props.latLng}></Map>
+        <Map></Map>
       }
         </>
     )

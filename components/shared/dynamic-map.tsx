@@ -1,13 +1,12 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useEffect, useState } from "react";
 import "leaflet/dist/leaflet.css";
 import { MapContainer, TileLayer, Marker, useMap, Popup } from "react-leaflet";
 import { OpenStreetMapProvider } from "leaflet-geosearch";
-import SearchControl from "./SearchControl";
 import "leaflet-geosearch/dist/geosearch.css";
 import "leaflet/dist/leaflet.css";
-import L, { LatLng } from "leaflet";
+import { icon, LatLng } from "leaflet";
 
 type Props = {
   latLng?: LatLng;
@@ -17,9 +16,24 @@ type Props = {
 export default function Map({
   latLng
 }: Props) {
+  const [data, setData] = useState<LatLng>()
+  const [isLoading, setLoading] = useState(false)
+ 
+  useEffect(() => {
+    setLoading(true)
+    fetch('/api/map')
+      .then((res) => res.json())
+      .then((data) => {
+        if(data.lat && data.long){
+          setData(new LatLng(data.lat, data.long))
+        }
+        setLoading(false)
+      })
+  }, [])
+  
   const prov = new OpenStreetMapProvider();
 
-  let icon = L.icon({
+  let iconImage = icon({
     iconSize: [25, 41],
     iconAnchor: [10, 41],
     popupAnchor: [2, -40],
@@ -33,16 +47,18 @@ export default function Map({
     const map = useMap();
      useEffect(() => {
       if(latLng){
-        map.setView(latLng, 18);
+        map.setView(latLng, 14);
       }
      }, [latLng, map]);
      return null;
    }
 
+   if (isLoading) return <p>Loading...</p>
+
   return (
     <MapContainer
       center={latLng || [49.8, 24]}
-      zoom={12}
+      zoom={14}
       zoomControl={false}
       scrollWheelZoom={false}
       className="h-full"
@@ -51,9 +67,9 @@ export default function Map({
         attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
         url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
       />
-      <RecenterAutomatically latLng={latLng}></RecenterAutomatically>
+      <RecenterAutomatically latLng={data}></RecenterAutomatically>
       {
-      latLng && <Marker position={[latLng.lat, latLng.lng]} icon={icon}>
+      latLng && <Marker position={data ? [data.lat, data.lng]: [0,0]} icon={iconImage}>
         <Popup>
           You are here
         </Popup>
