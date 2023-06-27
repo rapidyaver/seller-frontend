@@ -13,9 +13,7 @@ type Props = {
 };
 
 
-export default function Map({
-  latLng
-}: Props) {
+export default function Map() {
   const [data, setData] = useState<LatLng>()
   const [isLoading, setLoading] = useState(false)
  
@@ -57,7 +55,7 @@ export default function Map({
 
   return (
     <MapContainer
-      center={latLng || [49.8, 24]}
+      center={data ? [data.lat, data.lng]: [0,0]}
       zoom={14}
       zoomControl={false}
       scrollWheelZoom={false}
@@ -69,7 +67,7 @@ export default function Map({
       />
       <RecenterAutomatically latLng={data}></RecenterAutomatically>
       {
-      latLng && <Marker position={data ? [data.lat, data.lng]: [0,0]} icon={iconImage}>
+      data && <Marker position={data ? [data.lat, data.lng]: [0,0]} icon={iconImage}>
         <Popup>
           You are here
         </Popup>

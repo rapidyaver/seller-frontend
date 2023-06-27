@@ -25,8 +25,8 @@ export default function NavBar({ session }: { session: Session | null }) {
             : "bg-white/0"
         } z-30 transition-all`}
       >
-        <div className="mx-5 flex h-16 max-w-screen-xl items-center justify-between xl:mx-auto">
-          <Link href="/" className="flex items-center font-display text-2xl">
+        <div className="mx-5 flex h-m h-16 max-w-screen-xl items-center justify-between xl:mx-auto">
+          <Link href="/" className="flex h-10 items-center font-display text-md md:text-2xl">
             <Image
               src="/logo.png"
               alt="Precedent logo"
@@ -37,13 +37,14 @@ export default function NavBar({ session }: { session: Session | null }) {
             <p>PromoHunter</p>
           </Link>
           {
-            location != '/business' && <Link href="/business" className="flex gap-x-0.5 ml-auto mr-6 text-black" >
-            <p>For Business</p>
-            <ExternalLink className="pt-1 pb-1"></ExternalLink>
-          </Link>
+            location != '/business' && 
+            <Link href="/business" className="flex h-10 items-center gap-x-0.5 ml-auto mr-6 text-black text-sm md:text-xl" >
+              <p>For Business</p>
+              <ExternalLink className="pt-1 pb-1"></ExternalLink>
+            </Link>
           }
           {
-            location === '/business' && <Link href="/" className="flex gap-x-0.5 ml-auto mr-6 text-black" >
+            location === '/business' && <Link href="/" className="flex h-10 items-center gap-x-0.5 ml-auto mr-6 text-black text-sm md:text-xl" >
             <p>For Individuals</p>
             <ExternalLink className="pt-1 pb-1"></ExternalLink>
           </Link>

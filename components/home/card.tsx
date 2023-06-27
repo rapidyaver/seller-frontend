@@ -27,7 +27,7 @@ export default function Card({
         <Image
           width={350}
           height={350}
-          className="w-full h-80 rounded-lg object-cover object-center shadow-md"
+          className="w-full sm:h-60 md:h-80 rounded-lg object-cover object-center shadow-md"
           src={imageUrl}
           alt={description}
           style={imageStyle}

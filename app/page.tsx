@@ -1,8 +1,6 @@
 import Balancer from "react-wrap-balancer";
 import Prisma from '@/lib/prisma';
 import TabMenuHome from "@/components/home/tab-menu-home";
-import { headers } from 'next/headers'
-import { LatLng } from "leaflet";
 
 async function getPromotions() {
   const query = await Prisma.$queryRaw<{ id: string }[]> `SELECT id FROM "Location" l  where ST_DWithin(coords::geography, ST_MakePoint(52.0562912, 4.4980833),1609.344);`
@@ -46,8 +44,9 @@ export default async function Home() {
         >
         </div>
       </div>
-
-      <TabMenuHome promotions={promotions}></TabMenuHome>
+      <div className="z-10 my-4 w-full max-w-2xl px-5 xl:px-0">
+        <TabMenuHome promotions={promotions}></TabMenuHome>
+      </div>
     </>
   );
 }

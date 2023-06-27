@@ -17,7 +17,7 @@ export default function Map({
 }: Props) {
   return (
     <div className="z-10 h-80 w-full  max-w-screen-xl mx-auto px-5 xl:px-0">
-        <DynamicMap latLng={latLng} />
+        <DynamicMap/>
     </div>
   )
 }
