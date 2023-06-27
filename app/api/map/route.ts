@@ -10,5 +10,5 @@ export async function GET(req: NextRequest) {
     console.log("api long "  +  req.headers.get("x-vercel-ip-longitude"));
     console.log("api city "  +  req.headers.get("x-vercel-ip-city"));
   
-    return NextResponse.json({lat, long});
+    return NextResponse.json({lat: req.headers.get("x-vercel-ip-latitude"), long: req.headers.get("x-vercel-ip-longitude")});
   }

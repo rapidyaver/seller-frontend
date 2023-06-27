@@ -22,21 +22,6 @@ async function getPromotions() {
 
 
 export default async function Home() {
-  const headersList = headers()
-  console.log(headersList)
-  let lat = headersList.get("x-vercel-ip-latitude");
-  let long = headersList.get("x-vercel-ip-longitude");
-  
-  if(!lat){
-    lat = "0";
-  }
-  if(!long){
-    long = "0";
-  }
-
-  console.log("lat "  + headersList.get("x-vercel-ip-latitude"));
-  console.log("long "  + headersList.get("x-vercel-ip-longitude"));
-  console.log("city "  + headersList.get("x-vercel-ip-city"));
   const promotions = await getPromotions();
   return (
     <>
