@@ -38,13 +38,13 @@ export default function NavBar({ session }: { session: Session | null }) {
           </Link>
           {
             location != '/business' && 
-            <Link href="/business" className="flex h-10 items-center gap-x-0.5 ml-auto mr-6 text-black text-sm md:text-xl" >
+            <Link href="/business" className="flex h-10 items-center gap-x-0.5 ml-auto px-2 text-black text-sm md:text-xl" >
               <p>For Business</p>
               <ExternalLink className="pt-1 pb-1"></ExternalLink>
             </Link>
           }
           {
-            location === '/business' && <Link href="/" className="flex h-10 items-center gap-x-0.5 ml-auto mr-6 text-black text-sm md:text-xl" >
+            location === '/business' && <Link href="/" className="flex h-10 items-center gap-x-0.5 ml-auto px-2 text-black text-sm md:text-xl" >
             <p>For Individuals</p>
             <ExternalLink className="pt-1 pb-1"></ExternalLink>
           </Link>
@@ -54,7 +54,7 @@ export default function NavBar({ session }: { session: Session | null }) {
               <UserDropdown session={session} />
             ) : (
               <button
-                className="rounded-full border border-black bg-black p-1.5 px-4 text-sm text-white transition-all hover:bg-white hover:text-black"
+                className="rounded-full h-10 border border-black bg-black px-2 text-sm text-white transition-all hover:bg-white hover:text-black"
                 onClick={() => setShowSignInModal(true)}
               >
                 Sign In
