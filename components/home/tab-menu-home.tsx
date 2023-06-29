@@ -17,7 +17,7 @@ export default function TabMenuHome(props:Props) {
     const [tabName, setTabName] = useState("List")
     return (
         <>
-         <ul className="w-full max-w-2xl text-sm font-medium text-center text-gray-500 divide-x divide-gray-200 rounded-lg shadow flex">
+         <ul className="w-full max-w-2xl m-auto text-sm font-medium text-center text-gray-500 divide-x divide-gray-200 rounded-lg shadow flex">
             <li className="w-full">
               <a onClick={() => setTabName("List")}  href="#" className={tabName == "List" ? "inline-block w-full p-4 text-gray-900 bg-gray-100 rounded-l-lg active focus:outline-none" : "inline-block w-full p-4 text-gray-500 bg-white rounded-l-lg active focus:outline-none"} aria-current="page">List</a>
             </li>
@@ -27,7 +27,7 @@ export default function TabMenuHome(props:Props) {
          </ul>
       {
         tabName == "List" &&
-        <div className="my-10 grid w-full max-w-screen-xl animate-fade-up grid-cols-1 gap-5 px-5 md:grid-cols-3 xl:px-0">
+        <div className="my-10 grid m-auto w-full max-w-screen-xl animate-fade-up grid-cols-1 gap-5 px-5 md:grid-cols-3 xl:px-0">
         {props.promotions.map(({ productName, productDescription, imageUrl, price, locations }) => (
           <Card
             key={productName}

@@ -44,7 +44,7 @@ export default async function Home() {
         >
         </div>
       </div>
-      <div className="z-10 my-4 w-full max-w-2xl px-5 xl:px-0">
+      <div className="z-10 my-4 w-full px-5 xl:px-0">
         <TabMenuHome promotions={promotions}></TabMenuHome>
       </div>
     </>
