@@ -5,6 +5,15 @@ import TabMenuHome from "@/components/home/tab-menu-home";
 async function getPromotions() {
   const query = await Prisma.$queryRaw<{ id: string }[]> `SELECT id FROM "Location" l  where ST_DWithin(coords::geography, ST_MakePoint(52.0562912, 4.4980833),1609.344);`
   const promotions = await Prisma.promotion.findMany({
+   where : {
+      locations : {
+        some : {
+          locationId : {
+            in: query.map(({ id }) => id)
+          }
+        }
+      }
+   },
     include: {
       locations: {
         where: {

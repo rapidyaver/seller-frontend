@@ -2,7 +2,7 @@
 import { PhotoIcon } from "@heroicons/react/24/solid";
 import Balancer from "react-wrap-balancer";
 import React, { ChangeEvent, useState } from "react";
-import Select, { components } from 'react-select'
+import Select, { MultiValue } from 'react-select'
 import { Location } from "@prisma/client";
 import Image from "next/image";
 
@@ -19,7 +19,7 @@ export default function NewPromotionForm(props:Props) {
   })
   const [productName, setproductName] = useState("");
   const [description, setDescription] = useState("");
-  const [locations, setLocations] = useState<Array<string>>([]);
+  const [locations, setLocations] = useState<MultiValue<{ value: string; label: string; }>>([]);
   const [file, setFile] = useState<File | null>(null);
   const [imageUrl, setImageUrl] = useState("");
   const [price, setPrice] = useState(0);
@@ -60,7 +60,7 @@ export default function NewPromotionForm(props:Props) {
       productName,
       description,
       price,
-      locations,
+      locations : locations.map(loc => loc.value),
     };
  
     // Send the data to the server in JSON format.
@@ -83,7 +83,12 @@ export default function NewPromotionForm(props:Props) {
  
     // Send the form data to our forms API on Vercel and get a response.
     const response = await fetch(endpoint, options);
- 
+    setproductName("");
+    setFile(null)
+    setDescription("");
+    setImageUrl("");
+    setLocations([]);
+    setPrice(0);
   };
 
   return (
@@ -233,7 +238,8 @@ export default function NewPromotionForm(props:Props) {
                     <Select closeMenuOnSelect={false}
                             isMulti={true} 
                             noOptionsMessage={() => "No more options"}
-                            onChange={(e) => setLocations(e.map( location => location.value))}
+                            onChange={(e) => setLocations(e)}
+                            value={locations}
                             className="block flex-row w-full rounded-md shadow-sm ring-1 ring-inset flex-1 border-0 bg-transparent text-gray-900 placeholder:text-gray-400 focus:ring-0 sm:text-sm sm:leading-6" 
                             options={options} />
                   </div>

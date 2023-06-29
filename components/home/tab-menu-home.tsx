@@ -1,8 +1,7 @@
 "use client";
 import Card from "@/components/home/card";
 import Map  from "@/components/shared/map";
-import { Session } from "next-auth";
-import { Location, Promotion, PromotionsOnLocations } from "@prisma/client";
+import { Promotion, PromotionsOnLocations } from "@prisma/client";
 import { useState } from "react";
 import { LatLng } from "leaflet";
 
@@ -33,7 +32,7 @@ export default function TabMenuHome(props:Props) {
             key={productName}
             price={price.toString()}
             title={productName}
-            description={productDescription}
+            description={"Available in " + locations.length + " locations"}
             imageUrl={imageUrl}
           />
         ))}
