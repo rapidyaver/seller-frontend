@@ -17,12 +17,10 @@ async function getPromotions() {
    },
     include: {
       locations: {
-        where: {
-          locationId: {
-            in: query.map(({ id }) => id)
-          }
+        include: {
+          location : true
         }
-      },
+      }
     },
   })
   return promotions;
@@ -57,7 +55,7 @@ export default async function Home() {
         >
         </div>
       </div>
-      <div className="z-10 my-4 w-full px-5 xl:px-0">
+      <div className="z-10 my- sm:my-4 w-full px-5 xl:px-0">
         <TabMenuHome city={city} promotions={promotions}></TabMenuHome>
       </div>
     </>

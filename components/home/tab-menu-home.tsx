@@ -1,15 +1,15 @@
 "use client";
 import Card from "@/components/home/card";
 import Map  from "@/components/shared/map";
-import { Promotion, PromotionsOnLocations } from "@prisma/client";
+import { Promotion, PromotionsOnLocations, Location } from "@prisma/client";
 import { useState } from "react";
 import { LatLng } from "leaflet";
 import { MapPin } from "lucide-react";
 
 type Props = {
-    promotions: (Promotion & {
-        locations: PromotionsOnLocations[];
-    })[],
+    promotions: (Promotion & { locations: (PromotionsOnLocations & {
+      location: Location;
+  })[] })[],
     latLng?: LatLng,
     city?: string
   };
@@ -25,7 +25,7 @@ export default function TabMenuHome(props:Props) {
                     <MapPin className="w-5 h-5 text-gray-500 dark:text-gray-400"></MapPin>
                 </div>
                 <input type="search" value={props.city} id="default-search" className="block w-full p-4 pl-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-teal-500 focus:border-teal-500"/>
-                <button type="submit" className="text-white absolute right-2.5 bottom-2.5 bg-teal-600 hover:bg-teal-700 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2">Locate Me</button>
+                <button type="submit" className="text-white absolute right-2.5 bottom-2.5 bg-teal-600 hover:bg-teal-700 focus:ring-4 focus:outline-none focus:ring-blue-300 font-normal rounded-lg text-sm px-2 py-2">Locate Me</button>
             </div>
           </form>
          <ul className="max-w-2xl m-auto text-sm font-medium text-center text-gray-500 divide-x divide-gray-200 rounded-lg shadow flex">
@@ -44,7 +44,7 @@ export default function TabMenuHome(props:Props) {
             key={productName}
             price={price.toString()}
             title={productName}
-            description={"Available in " + locations.length + " locations"}
+            description={locations[0].location.name}
             imageUrl={imageUrl}
           />
         ))}

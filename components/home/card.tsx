@@ -4,8 +4,8 @@ import Balancer from "react-wrap-balancer";
 import Image from "next/image";
 
 const imageStyle = {
-  border: '1px solid #fff',
-  "object-fit": "cover",
+  "object-fit": "contain",
+  width: "100% !important",
 }
 
 export default function Card({
@@ -22,19 +22,18 @@ export default function Card({
   large?: boolean;
 }) {
   return (
-    <div className="wrapper z-10 text-gray-900 antialiased">
-      <div>
+    <div className="wrapper z-10 text-gray-900 antialiased shadow-md">
         <Image
-          width={350}
-          height={350}
-          className="w-full sm:h-60 md:h-80 rounded-lg object-cover object-center shadow-md"
           src={imageUrl}
+          width={150}
+          className="h-40 sm:h-60"
+          height={200}
           alt={description}
-          style={imageStyle}
+         style={imageStyle}
         ></Image>
 
-        <div className="relative -mt-16 px-4  ">
-          <div className="rounded-lg bg-white p-6 shadow-lg">
+        <div className="relative">
+          <div className="rounded-lg bg-white p-6 shadow-xl">
             <div className="flex items-baseline">
               <span className="inline-block rounded-full bg-teal-200 px-2 text-xs font-semibold  uppercase tracking-wide text-teal-800">
                 New
@@ -62,7 +61,6 @@ export default function Card({
             </div>
           </div>
         </div>
-      </div>
     </div>
   );
 }
