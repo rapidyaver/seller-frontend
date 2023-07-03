@@ -13,11 +13,12 @@ type Props = {
 };
 
 
-export default function Map() {
+export default function Map(props: Props) {
   const [data, setData] = useState<LatLng>()
   const [isLoading, setLoading] = useState(false)
  
   useEffect(() => {
+    if(data) return
     setLoading(true)
     fetch('/api/map')
       .then((res) => res.json())
@@ -52,10 +53,11 @@ export default function Map() {
    }
 
    if (isLoading) return <p>Loading...</p>
+  const center = props.latLng || data;
 
   return (
     <MapContainer
-      center={data ? [data.lat, data.lng]: [0,0]}
+      center={center ? [center.lat, center.lng]: [0,0]}
       zoom={14}
       zoomControl={false}
       scrollWheelZoom={false}
@@ -65,9 +67,9 @@ export default function Map() {
         attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
         url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
       />
-      <RecenterAutomatically latLng={data}></RecenterAutomatically>
+      <RecenterAutomatically latLng={center}></RecenterAutomatically>
       {
-      data && <Marker position={data ? [data.lat, data.lng]: [0,0]} icon={iconImage}>
+      center && <Marker position={center ? [center.lat, center.lng]: [0,0]} icon={iconImage}>
         <Popup>
           You are here
         </Popup>

@@ -29,7 +29,6 @@ export default function NewLocationForm() {
     }
 
     let timeout = setTimeout(async () => {
-      console.log("FETCHING RESULTS");
       const results = await provider.search({ query: location })
       console.log(results); // » [{}, {}, {}, ...]
       setSearchResults(results)
