@@ -20,3 +20,34 @@ export async function POST(req: NextRequest) {
   })
   return NextResponse.json(findUser);
 }
+
+export async function GET(req: NextRequest) {
+  const { searchParams } = new URL(req.url)
+
+  const latParam = searchParams.get("lat");
+  const longParam = searchParams.get("long");
+
+  const lat = latParam ? parseFloat(latParam) : 0;
+  const long = longParam ? parseFloat(longParam) : 0;
+  
+  const query = await Prisma.$queryRaw<{ id: string }[]> `SELECT id FROM "Location" l  where ST_DWithin(coords::geography, ST_MakePoint(${lat}, ${long}),1609.344);`
+  const promotions = await Prisma.promotion.findMany({
+   where : {
+      locations : {
+        some : {
+          locationId : {
+            in: query.map(({ id }) => id)
+          }
+        }
+      }
+   },
+    include: {
+      locations: {
+        include: {
+          location : true
+        }
+      }
+    },
+  })
+  return  NextResponse.json(promotions);
+}

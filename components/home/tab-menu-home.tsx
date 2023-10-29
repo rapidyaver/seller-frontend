@@ -113,7 +113,7 @@ export default function TabMenuHome(props:Props) {
       {
         tabName == "Map" && 
         <div className="px-5 my-10">
-          <Map latLng={latlng}></Map>
+          <Map latLng={latlng} markers={props.promotions.map(pro => ({ latLng: new LatLng(52.0607, 4.4940)}))}></Map>
         </div>
       }
         </>

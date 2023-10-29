@@ -10,6 +10,9 @@ import { icon, LatLng } from "leaflet";
 
 type Props = {
   latLng?: LatLng;
+  markers?: {
+    latLng: LatLng
+  }[];
 };
 
 
@@ -75,6 +78,14 @@ export default function Map(props: Props) {
         </Popup>
       </Marker>
       }
+      {props.markers && props.markers.map(({ latLng }) => (
+        <Marker key={latLng.lat.toString()+latLng.lng.toString()} position={latLng} icon={iconImage}>
+        <Popup>
+          Market
+        </Popup>
+      </Marker>
+      ))}
+      
     </MapContainer>
   );
 }

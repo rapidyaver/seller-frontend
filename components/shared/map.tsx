@@ -10,14 +10,17 @@ const DynamicMap = dynamic(() => import('./dynamic-map'), {
 
 type Props = {
   latLng?: LatLng;
+  markers?: {
+    latLng: LatLng
+  }[];
 };
 
 export default function Map({
-  latLng
+  latLng, markers
 }: Props) {
   return (
     <div className="z-10 h-80 w-full  max-w-screen-xl mx-auto px-5 xl:px-0">
-        <DynamicMap latLng={latLng}/>
+        <DynamicMap latLng={latLng} markers={markers}/>
     </div>
   )
 }
